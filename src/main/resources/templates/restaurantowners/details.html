@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Szczegóły właściciela</title>
+</head>
+<body>
+<h1>Restaurant owner details</h1>
+<p><strong>ID:</strong> <span th:text="${owner.id}">1</span></p>
+<p><strong>First Name Last Name :</strong> <span th:text="${owner.firstName} + ' ' + ${owner.lastName}">Jan Kowalski</span></p>
+<p><strong>Email:</strong> <span th:text="${owner.email}">jan.kowalski@example.com</span></p>
+<p><strong>Telefon:</strong> <span th:text="${owner.phoneNumber}">123-456-789</span></p>
+
+</body>
+</html>

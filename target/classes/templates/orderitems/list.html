@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Item List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Order Items</h1>
+    <nav>
+        <!-- Link do formularza dodawania pozycji z orderId -->
+        <a th:href="@{/order-items/form}" style="color: red;">Add New Order Item</a>
+    </nav>
+</header>
+
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Menu Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orderItems.empty}">
+            <td colspan="6">No order items available.</td>
+        </tr>
+        <tr th:each="orderItem : ${orderItems}">
+            <td th:text="${orderItem.id}"></td>
+            <td th:text="${orderItem.menuItem.name}"></td>
+            <td th:text="${orderItem.quantity}"></td>
+            <td th:text="${orderItem.price}"></td>
+
+            <td>
+                <!-- Formularz usuwania -->
+                <form th:action="@{/order-items/delete/{id}(id=${orderItem.id})}" method="post" style="display:inline;">
+                    <!--                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    <p></p>
+</footer>
+
+</body>
+</html>

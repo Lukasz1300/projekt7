@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        /* Stylowanie pól na czerwono */
+        .readonly-field {
+            border: 2px solid red;
+        }
+        .readonly-info {
+            color: red;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit User</h1>
+
+<form th:action="@{/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <input type="hidden" name="_method" value="put"/>
+
+    <!-- Pole hasła wyświetlane, ale tylko do odczytu -->
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" th:field="*{password}" value="${user.password}" readonly="true" class="readonly-field"/>
+        <span class="readonly-info">Cannot be edited</span>
+    </div>
+
+    <!-- Pozostałe pola formularza -->
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" readonly="true" class="readonly-field"/>
+        <span class="readonly-info">Cannot be edited</span>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}"/>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    </div>
+
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}"/>
+        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+    </div>
+
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}"/>
+        <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+    </div>
+
+    <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/>
+        <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+    </div>
+
+    <div>
+        <label for="addressCity">City:</label>
+        <input type="text" id="addressCity" th:field="*{addressCity}"/>
+        <div th:if="${#fields.hasErrors('addressCity')}" th:errors="*{addressCity}"></div>
+    </div>
+
+    <div>
+        <label for="addressStreet">Street:</label>
+        <input type="text" id="addressStreet" th:field="*{addressStreet}"/>
+        <div th:if="${#fields.hasErrors('addressStreet')}" th:errors="*{addressStreet}"></div>
+    </div>
+
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</body>
+</html>

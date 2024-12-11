@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create or Edit Restaurant</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your custom CSS -->
+</head>
+<body>
+<header>
+    <h1>Create or Edit Restaurant</h1>
+    <nav>
+        <li><a href="/restaurants">Back to Restaurant List</a></li>
+    </nav>
+    <br>
+</header>
+<main>
+    <form th:action="@{/restaurants}" th:object="${restaurant}" method="post">
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="name">Restaurant Name:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Restaurant Name" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="addressCity">City:</label>
+            <input type="text" id="addressCity" th:field="*{addressCity}" class="form-control" placeholder="City"
+                   required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="addressStreet">Street:</label>
+            <input type="text" id="addressStreet" th:field="*{addressStreet}" class="form-control" placeholder="Street"
+                   required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"
+                   placeholder="Phone Number">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" class="form-control"
+                      placeholder="Restaurant Description"></textarea>
+        </div>
+
+        <!-- Owner selection -->
+        <div class="form-group">
+            <label for="owner">Owner:</label>
+            <select id="owner" th:field="*{owner.id}" class="form-control">
+                <option th:each="owner : ${owners}" th:value="${owner.id}"
+                        th:text="${owner.firstName} + ' ' + ${owner.lastName}"></option>
+            </select>
+        </div>
+
+        <!-- Save button -->
+    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Save Restaurant</button>
+    </form>
+</main>
+
+<footer>
+    <p></p>
+</footer>
+</body>
+</html>

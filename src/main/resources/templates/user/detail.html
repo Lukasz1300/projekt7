@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>User Details</h1>
+<p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+<p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+<p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+<p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
+<p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
+<p><strong>Phone Number:</strong> <span th:text="${user.phoneNumber}"></span></p>
+<p><strong>City:</strong> <span th:text="${user.addressCity}"></span></p>
+<p><strong>Street:</strong> <span th:text="${user.addressStreet}"></span></p>
+
+<a th:href="@{/users}">Back to list</a>
+</body>
+</html>

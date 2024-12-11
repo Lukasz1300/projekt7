@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Szczegóły pozycji zamówienia</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Szczegóły pozycji zamówienia</h1>
+<p><strong>ID:</strong> <span th:text="${orderItem.id}"></span></p>
+<p><strong>Nazwa pozycji:</strong> <span th:text="${orderItem.menuItem != null ? orderItem.menuItem.name : 'Brak'}"></span></p>
+<p><strong>Ilość:</strong> <span th:text="${orderItem.quantity}"></span></p>
+<p><strong>Cena:</strong> <span th:text="${orderItem.price}"></span></p>
+<p><strong>Zamówienie ID:</strong> <span th:text="${orderItem.order != null ? orderItem.order.id : 'Brak'}"></span></p>
+
+
+<a href="/order-items">Powrót do listy</a>
+</body>
+</html>

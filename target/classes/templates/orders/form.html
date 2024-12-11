@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your custom CSS -->
+</head>
+<body>
+<h1>Create a New Order</h1>
+<h3>The order will be created when user city is the same as resturant city<h3>
+
+<form th:action="@{/orders/form}" th:object="${order}" method="post">
+
+    <!-- User selection field -->
+    <label for="user">Select a user:</label>
+    <select id="user" th:field="*{user.id}">
+        <option th:each="user : ${users}" th:value="${user.id}"
+                th:text="${user.firstName + ' ' + user.lastName + ' - ' + user.addressCity + ', ' + user.addressStreet}">
+        </option>
+    </select>
+    <p>
+        <!-- Restaurant selection field -->
+        <label for="restaurant">Select a restaurant:</label>
+        <select id="restaurant" th:field="*{restaurant.id}">
+            <option th:each="restaurant : ${restaurants}" th:value="${restaurant.id}"
+                    th:text="${restaurant.name + ' - ' + restaurant.addressCity}">
+            </option>
+        </select>
+    <p>
+        <!-- Order status field -->
+        <label for="orderStatus">Order status:</label>
+        <input type="text" id="orderStatus" th:field="*{orderStatus}" readonly="readonly"/>
+    <p>
+    <h3>Delivery address: user address City, Street<h3>
+        <!-- Delivery address: city -->
+        <label for="addressCity">City:</label>
+        <input type="text" id="addressCity" th:field="*{addressCity}" placeholder="Enter city"/>
+    <p>
+        <!-- Delivery address: street -->
+        <label for="addressStreet">Street:</label>
+        <input type="text" id="addressStreet" th:field="*{addressStreet}" placeholder="Enter street"/>
+    <p>
+
+    <div th:if="${error}" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Submit button -->
+        <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

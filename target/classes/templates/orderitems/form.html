@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj Pozycję Zamówienia</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<h2>Add Order Item</h2>
+<h3>To create order items, you must first open the <a href="/orders">Order</a></h3>
+
+<!-- Formularz główny -->
+<form th:action="@{/order-items/form}" method="post">
+
+    <!-- Wybór zamówienia -->
+    <div>
+        <label for="order">Order:</label>
+        <select id="order" name="orderId" required>
+            <option value="" disabled selected>Select order</option>
+            <option th:each="order : ${orders}"
+                    th:value="${order.id}"
+                    th:text="'Order ID: ' + ${order.id}"></option>
+        </select>
+    </div>
+
+    <center>
+        <!-- Przycisk 'Next' -->
+        <button type="submit">Next</button>
+    </center>
+
+    <!-- Tabela z pozycjami menu -->
+    <div th:if="${menuItems != null and #lists.size(menuItems) > 0}">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Restaurant ID</th>
+                <th>Restaurant Name</th>
+                <th>Menu</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="menuItem, iterStat : ${menuItems}">
+                <td th:text="${menuItem.id}"></td>
+                <td th:text="${menuItem.restaurant.id}"></td>
+                <td th:text="${menuItem.restaurant.name}"></td>
+                <td th:text="${menuItem.name}"></td>
+                <td th:text="${menuItem.price}"></td>
+                <td>
+                    <!-- Checkbox do wyboru pozycji menu -->
+                    <input type="checkbox"
+                           th:id="'menuItem_' + ${iterStat.index}"
+                           name="menuItemIds"
+                           th:value="${menuItem.id}"
+                           onchange="toggleQuantity(this)"/>
+
+                    <!-- Pole ilości -->
+                    <input type="number"
+                           name="quantities"
+                           value="1"
+                           min="1"
+                           max="100"
+                           th:disabled="true"
+                           th:id="'quantity_' + ${iterStat.index}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${menuItems == null or #lists.isEmpty(menuItems)}">
+        <p>No menu items available.</p>
+    </div>
+</form>
+
+<!-- Skrypt do włączania/wyłączania pola ilości -->
+<script>
+    function toggleQuantity(checkbox) {
+        const quantityField = document.getElementById('quantity_' + checkbox.id.split('_')[1]);
+        quantityField.disabled = !checkbox.checked;
+    }
+</script>
+
+</body>
+</html>

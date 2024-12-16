@@ -1,4 +1,4 @@
-# projekt7 food ordering app
+# projekt7 - food ordering app
 
 Applications can be run using Docker, use the following commands:
 
